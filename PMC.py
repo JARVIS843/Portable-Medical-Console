@@ -1,13 +1,8 @@
 import sys
-from PyQt5 import QtWidgets, uic
-
-class MyApp(QtWidgets.QMainWindow):
-    def __init__(self):
-        super(MyApp, self).__init__()
-        uic.loadUi("Main.ui", self)  # Load the UI file here
-        self.show()  # Show the main window
+from PyQt5.QtWidgets import QApplication
+from Normal import NormalWindow
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    window = MyApp()
+    app = QApplication(sys.argv)
+    window = NormalWindow()
     sys.exit(app.exec_())
