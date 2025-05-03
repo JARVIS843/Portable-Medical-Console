@@ -1,11 +1,9 @@
-import sys
-import subprocess
 from PyQt5 import QtWidgets, uic
 
 class NormalWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(NormalWindow, self).__init__()
-        uic.loadUi("Normal.ui", self)
+        uic.loadUi("../UI/Normal.ui", self)
 
         self.comboBox.currentTextChanged.connect(self.handle_mode_switch)
         self.comboBox_2.currentTextChanged.connect(self.handle_model_switch)
@@ -14,13 +12,20 @@ class NormalWindow(QtWidgets.QMainWindow):
 
     def handle_mode_switch(self, text):
         if text == "EMS":
-            subprocess.Popen([sys.executable, "EMS.py"])
+            self.new_window = EMSWindow()
+            self.new_window.show()
             self.close()
 
     def handle_model_switch(self, text):
         if text == "Eye Disease":
-            subprocess.Popen([sys.executable, "Eye.py"])
+            self.new_window = EyeWindow()
+            self.new_window.show()
             self.close()
         elif text == "Skin Disease":
-            subprocess.Popen([sys.executable, "Skin.py"])
+            self.new_window = SkinWindow()
+            self.new_window.show()
             self.close()
+
+from Eye import EyeWindow
+from Skin import SkinWindow
+from EMS import EMSWindow
