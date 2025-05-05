@@ -140,12 +140,12 @@
        </item>
        <item>
         <property name="text">
-         <string>Stroke Prediction</string>
+         <string>Eye Disease</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Eye Disease</string>
+         <string>Stroke Prediction</string>
         </property>
        </item>
       </widget>

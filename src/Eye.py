@@ -17,15 +17,16 @@ class EyeWindow(QtWidgets.QMainWindow):
             self.close()
 
     def handle_model_switch(self, text):
-        if text == "Skin Disease":
-            self.new_window = SkinWindow()
-            self.new_window.show()
-            self.close()
-        elif text == "Stroke Prediction":
+        if text == "Stroke Prediction":
             self.new_window = NormalWindow()
             self.new_window.show()
             self.close()
-
+            
+        else:
+              self.new_window = SkinWindow()
+              self.new_window.show()
+              self.close()
+              
 from Skin import SkinWindow
 from Normal import NormalWindow
 from EMS import EMSWindow

@@ -140,12 +140,12 @@
        </item>
        <item>
         <property name="text">
-         <string>Stroke Prediction</string>
+         <string>Skin Disase</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Skin Disase</string>
+         <string>Stroke Prediction</string>
         </property>
        </item>
       </widget>
