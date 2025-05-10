@@ -22,7 +22,7 @@ class EyeWindow(QtWidgets.QMainWindow):
             self.new_window.show()
             self.close()
             
-        else:
+        elif text == "Skin Disease":
               self.new_window = SkinWindow()
               self.new_window.show()
               self.close()
