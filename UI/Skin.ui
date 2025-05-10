@@ -87,7 +87,27 @@
     </column>
     <column>
      <property name="text">
-      <string>Attributes</string>
+      <string>Dx Type</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Age</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Sex</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Localization</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>PATH</string>
      </property>
     </column>
    </widget>
@@ -192,6 +212,34 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1024</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFiles">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionLoad_Samples"/>
+    <addaction name="actionExport"/>
+   </widget>
+   <addaction name="menuFiles"/>
+  </widget>
+  <action name="actionLoad_Samples">
+   <property name="text">
+    <string>Load Sample</string>
+   </property>
+  </action>
+  <action name="actionExport">
+   <property name="text">
+    <string>Export</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
