@@ -142,36 +142,24 @@ class SkinWindow(QtWidgets.QMainWindow):
     def display_selected_image(self):
         selected_row = self.Data_Table.currentRow()
         if selected_row == -1 or not self.src_directory:
-            return  # No selection or no source directory set
+            return  # No selection or source not set
 
-        # Resolve CSV path from current source directory
-        csv_path = None
+        # Path to current CSV in source directory
+        csv_path = os.path.join(self.src_directory, 'SKIN_sample.csv')
+        # If exported, use the renamed CSV file
         for file in os.listdir(self.src_directory):
             if file.endswith('.csv'):
                 csv_path = os.path.join(self.src_directory, file)
                 break
 
-        if not csv_path or not os.path.exists(csv_path):
-            self.imageDisplayer.setText("CSV file not found")
-            return
-
         try:
             df = pd.read_csv(csv_path)
+            image_id = df.iloc[selected_row]['image_id']
+            image_path = os.path.join(self.src_directory, image_id)
+            
+            print(image_path)
 
-            # Determine which column to use for the image filename
-            if 'image_path' in df.columns:
-                image_filename = df.iloc[selected_row]['image_path']
-            elif 'image_id' in df.columns:
-                image_id = df.iloc[selected_row]['image_id']
-                image_filename = f"{image_id}.jpg"
-            else:
-                self.imageDisplayer.setText("Missing image info")
-                return
-
-            image_path = os.path.join(self.src_directory, image_filename)
-        
-
-            if not os.path.exists(image_path):
+            if os.path.exists(image_path):
                 self.imageDisplayer.clear()
                 self.imageDisplayer.setText("Image not found")
                 return
@@ -185,7 +173,7 @@ class SkinWindow(QtWidgets.QMainWindow):
                 250, 250, aspectRatioMode=Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation
             ))
 
-        except Exception as e:
+        except Exception:
             self.imageDisplayer.setText("Error loading image")
             
     def handle_take_photo(self):
