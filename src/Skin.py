@@ -20,7 +20,7 @@ class CameraWorker(QThread):
 
     def run(self):
         self.running = True
-        self.capture = cv2.VideoCapture(0) #Use 21 on Deployment
+        self.capture = cv2.VideoCapture(21) #Use 21 on Deployment
         while self.running:
             ret, frame = self.capture.read()
             if ret:

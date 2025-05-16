@@ -16,7 +16,7 @@ class CameraWorker(QThread):
 
     def __init__(self):
         super().__init__()
-        self.capture = cv2.VideoCapture(0)  #Change to 21 during Deployment
+        self.capture = cv2.VideoCapture(21)  #Change to 21 during Deployment
         self.last_frame = None
         self.active = True
 
