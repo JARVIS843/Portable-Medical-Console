@@ -32,7 +32,7 @@
    <widget class="QPushButton" name="Analyze_Button">
     <property name="geometry">
      <rect>
-      <x>500</x>
+      <x>520</x>
       <y>50</y>
       <width>171</width>
       <height>61</height>
@@ -50,7 +50,7 @@
    <widget class="QTableWidget" name="Data_Table">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>90</x>
       <y>160</y>
       <width>601</width>
       <height>421</height>
@@ -87,7 +87,7 @@
     </column>
     <column>
      <property name="text">
-      <string>Attributes</string>
+      <string>PATH</string>
      </property>
     </column>
    </widget>
@@ -191,6 +191,42 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="layoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>160</y>
+      <width>81</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="addButton">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Add Row</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="delButton">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Del Row</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -205,6 +241,7 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionLoad"/>
     <addaction name="actionLoad_Sample"/>
     <addaction name="actionExport"/>
    </widget>
@@ -218,6 +255,11 @@
   <action name="actionExport">
    <property name="text">
     <string>Export</string>
+   </property>
+  </action>
+  <action name="actionLoad">
+   <property name="text">
+    <string>Load</string>
    </property>
   </action>
  </widget>

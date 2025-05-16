@@ -21,6 +21,7 @@ class SKINModel:
     def preprocess_sample_data(self, image_size=224):
         csv_path = os.path.join(self.sample_dir, "SKIN_sample.csv")
         df = pd.read_csv(csv_path)
+        df.drop(columns=["result", "id", "name", "time_modified", "Take Photo"], errors="ignore", inplace=True) #For custom dataset
         df['image_path'] = df['image_id'].apply(lambda x: os.path.join(self.sample_dir, f"{x}.jpg"))
 
         # Load and normalize images

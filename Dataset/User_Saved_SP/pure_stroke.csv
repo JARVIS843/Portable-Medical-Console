@@ -1,0 +1,16 @@
+id,name,time_modified,gender,age,hypertension,heart_disease,ever_married,work_type,Residence_type,avg_glucose_level,bmi,smoking_status,stroke
+4,Sample 4,2025-05-15 10:04,Male,59.0,0,0,Yes,Private,Rural,134.24,28.8,Unknown,0
+13,Sample 13,2025-05-15 10:04,Male,80.0,0,1,Yes,Self-employed,Rural,103.06,28.8,never smoked,0
+19,Sample 19,2025-05-15 10:04,Male,82.0,0,0,Yes,Private,Urban,217.57,33.5,formerly smoked,0
+23,Sample 23,2025-05-15 10:04,Male,54.0,0,0,Yes,Private,Urban,86.26,35.1,formerly smoked,0
+28,Sample 28,2025-05-15 10:04,Male,74.0,0,0,Yes,Private,Urban,158.9,32.4,formerly smoked,0
+31,Sample 31,2025-05-15 10:04,Male,62.0,0,0,Yes,Private,Rural,121.27,29.7,smokes,0
+43,Sample 43,2025-05-15 10:04,Male,65.0,0,0,Yes,Private,Urban,88.57,29.0,smokes,0
+47,Sample 47,2025-05-15 10:04,Male,70.0,1,0,Yes,Self-employed,Urban,99.6,34.3,formerly smoked,0
+64,Sample 64,2025-05-15 10:04,Male,77.0,1,0,Yes,Self-employed,Urban,71.7,32.8,never smoked,0
+84,Sample 84,2025-05-15 10:04,Male,78.0,0,1,Yes,Private,Urban,145.03,26.8,formerly smoked,0
+87,Sample 87,2025-05-15 10:04,Male,47.0,0,0,Yes,Private,Urban,86.94,41.1,formerly smoked,0
+89,Sample 89,2025-05-15 10:04,Male,63.0,0,1,Yes,Self-employed,Urban,116.69,34.5,formerly smoked,0
+92,Sample 92,2025-05-15 10:04,Male,58.0,0,0,No,Private,Rural,92.62,32.0,Unknown,0
+94,Sample 94,2025-05-15 10:04,Male,59.0,0,0,Yes,Private,Urban,200.62,35.8,formerly smoked,0
+96,Sample 96,2025-05-15 10:04,Male,78.0,0,0,Yes,Govt_job,Urban,59.74,27.0,formerly smoked,0

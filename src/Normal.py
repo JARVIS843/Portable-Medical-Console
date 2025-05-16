@@ -93,7 +93,7 @@ class NormalWindow(QtWidgets.QMainWindow):
     
     def export_table_data(self, file_path=None):
         
-        if file_path is None:
+        if file_path is not None:
             root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
             save_dir = os.path.join(root_dir, 'Dataset', 'User_Saved_SP')
             os.makedirs(save_dir, exist_ok=True)
