@@ -19,7 +19,7 @@ class CameraWorker(QThread):
 
     def run(self):
         self.running = True
-        self.capture = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+        self.capture = cv2.VideoCapture(0) #Use 21 on Deployment
         while self.running:
             ret, frame = self.capture.read()
             if ret:
@@ -140,20 +140,36 @@ class SkinWindow(QtWidgets.QMainWindow):
 
         
     def display_selected_image(self):
-
         selected_row = self.Data_Table.currentRow()
-        if selected_row == -1:
-            return  # No selection
+        if selected_row == -1 or not self.src_directory:
+            return  # No selection or no source directory set
 
-        # Get image ID from the Name column (col 1: "Sample #") or from dataset directly
-        root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-        sample_dir = os.path.join(root_dir, 'Dataset', 'SKIN_sample')
-        csv_path = os.path.join(sample_dir, 'SKIN_sample.csv')
+        # Resolve CSV path from current source directory
+        csv_path = None
+        for file in os.listdir(self.src_directory):
+            if file.endswith('.csv'):
+                csv_path = os.path.join(self.src_directory, file)
+                break
+
+        if not csv_path or not os.path.exists(csv_path):
+            self.imageDisplayer.setText("CSV file not found")
+            return
 
         try:
             df = pd.read_csv(csv_path)
-            image_id = df.iloc[selected_row]['image_id']
-            image_path = os.path.join(sample_dir, f"{image_id}.jpg")
+
+            # Determine which column to use for the image filename
+            if 'image_path' in df.columns:
+                image_filename = df.iloc[selected_row]['image_path']
+            elif 'image_id' in df.columns:
+                image_id = df.iloc[selected_row]['image_id']
+                image_filename = f"{image_id}.jpg"
+            else:
+                self.imageDisplayer.setText("Missing image info")
+                return
+
+            image_path = os.path.join(self.src_directory, image_filename)
+        
 
             if not os.path.exists(image_path):
                 self.imageDisplayer.clear()
@@ -175,11 +191,18 @@ class SkinWindow(QtWidgets.QMainWindow):
     def handle_take_photo(self):
         button = self.sender()
         row = button.property("row")
+        
+        # Prevent photo capture on protected sample data
+        if self.src_directory and os.path.basename(self.src_directory) == "SKIN_sample":
+            QMessageBox.warning(self, "Action Not Allowed", "You must export the dataset before taking photos.")
+            return
 
         if not hasattr(self, 'camera_worker') or not self.camera_worker.isRunning():
             # Start camera stream
             self.camera_worker = CameraWorker()
-            self.camera_worker.image_update.connect(self.imageDisplayer.setPixmap)
+            self.camera_worker.image_update.connect(
+                lambda img: self.imageDisplayer.setPixmap(QPixmap.fromImage(img))
+            )
             self.camera_worker.start()
             button.setText("Capture")
             self.active_photo_row = row
@@ -191,7 +214,6 @@ class SkinWindow(QtWidgets.QMainWindow):
             self.imageDisplayer.clear()
 
             if frame is not None:
-                import numpy as np
                 image_id = f"skin{row + 1}"
                 filename = f"{image_id}.jpg"
                 save_path = os.path.join(self.src_directory, filename)
