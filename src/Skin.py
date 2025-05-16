@@ -45,6 +45,8 @@ class CameraWorker(QThread):
 class SkinWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(SkinWindow, self).__init__()
+        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.showFullScreen()
         uic.loadUi("../UI/Skin.ui", self)
 
         self.comboBox.currentTextChanged.connect(self.handle_mode_switch)
@@ -591,6 +593,10 @@ class SkinWindow(QtWidgets.QMainWindow):
             item = QTableWidgetItem(full_label)
             item.setFlags(item.flags() & ~Qt.ItemIsEditable)
             self.Data_Table.setItem(i, 3, item)
+            
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Escape:
+            self.close()
     
     
     

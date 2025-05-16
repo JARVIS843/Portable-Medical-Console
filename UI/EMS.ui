@@ -29,31 +29,13 @@
    <double>1.000000000000000</double>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="Analyze_Button">
-    <property name="geometry">
-     <rect>
-      <x>780</x>
-      <y>40</y>
-      <width>171</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>15</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>ANALYZE</string>
-    </property>
-   </widget>
    <widget class="QTableWidget" name="Data_Table">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>160</y>
-      <width>881</width>
-      <height>421</height>
+      <x>90</x>
+      <y>150</y>
+      <width>401</width>
+      <height>411</height>
      </rect>
     </property>
     <attribute name="horizontalHeaderVisible">
@@ -77,17 +59,12 @@
     </column>
     <column>
      <property name="text">
-      <string>Time (Modified)</string>
+      <string>Time</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Result</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Attributes</string>
+      <string>Take Photo</string>
      </property>
     </column>
    </widget>
@@ -138,14 +115,46 @@
          <string>TQ Timing</string>
         </property>
        </item>
-       <item>
-        <property name="text">
-         <string>SPO2 &amp;  BPM</string>
-        </property>
-       </item>
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>77</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="addButton">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Add Row</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="imageDisplayer">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>160</y>
+      <width>400</width>
+      <height>400</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Please load a dataset first</string>
+    </property>
    </widget>
   </widget>
  </widget>

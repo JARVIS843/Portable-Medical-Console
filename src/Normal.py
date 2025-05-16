@@ -14,6 +14,8 @@ import os
 class NormalWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(NormalWindow, self).__init__()
+        self.setWindowFlags(Qt.FramelessWindowHint)  # Fullscreen & Borderless
+        self.showFullScreen()
         uic.loadUi("../UI/Normal.ui", self)
 
         self.comboBox.currentTextChanged.connect(self.handle_mode_switch)
@@ -319,6 +321,10 @@ class NormalWindow(QtWidgets.QMainWindow):
             self.Data_Table.setItem(i, 3, result_item)
 
         self.Data_Table.resizeColumnsToContents()
+        
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Escape:
+            self.close()
 
 
 from Eye import EyeWindow

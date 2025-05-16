@@ -44,6 +44,8 @@ class CameraWorker(QThread):
 class EyeWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(EyeWindow, self).__init__()
+        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.showFullScreen()
         uic.loadUi("../UI/Eye.ui", self)
 
         self.comboBox.currentTextChanged.connect(self.handle_mode_switch)
@@ -475,6 +477,11 @@ class EyeWindow(QtWidgets.QMainWindow):
                 self.Data_Table.setItem(i, 3, item)
     
         QMessageBox.information(self, "Analysis Complete", "Model prediction completed successfully.")
+        
+    
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Escape:
+            self.close()
 
               
 from Skin import SkinWindow
