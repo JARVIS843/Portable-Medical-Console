@@ -125,7 +125,7 @@
       <height>31</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="HL_Mode_Selection" stretch="2,0">
+    <layout class="QHBoxLayout" name="HL_Mode_Selection" stretch="0,0">
      <property name="spacing">
       <number>10</number>
      </property>

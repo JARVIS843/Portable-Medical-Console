@@ -11,7 +11,7 @@ class SKINModel:
     def __init__(self, sample_dir=None, model_path=None):
         # Resolve paths relative to project root
         root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-        self.sample_dir = sample_dir or os.path.join(root_dir, "Dataset", "SKIN_sample")
+        self.sample_dir = sample_dir
         self.model_path = model_path or os.path.join(root_dir, "Models", "SKIN_69.onnx")
         
         self.session = ort.InferenceSession(self.model_path)
@@ -19,7 +19,17 @@ class SKINModel:
         self.meta_input_name = self.session.get_inputs()[1].name
 
     def preprocess_sample_data(self, image_size=224):
-        csv_path = os.path.join(self.sample_dir, "SKIN_sample.csv")
+        
+        # Dynamically find the first .csv file in sample_dir
+        csv_path = None
+        for file in os.listdir(self.sample_dir):
+            if file.endswith('.csv'):
+                csv_path = os.path.join(self.sample_dir, file)
+                break
+
+        if not csv_path or not os.path.exists(csv_path):
+            raise FileNotFoundError("No valid CSV file found in the sample directory.")
+        
         df = pd.read_csv(csv_path)
         df.drop(columns=["result", "id", "name", "time_modified", "Take Photo"], errors="ignore", inplace=True) #For custom dataset
         df['image_path'] = df['image_id'].apply(lambda x: os.path.join(self.sample_dir, f"{x}.jpg"))
@@ -68,7 +78,17 @@ class SKINModel:
             'Vascular Lesions'
         ]
 
-        X_img, X_meta= self.preprocess_sample_data()
+        name_to_abbr = {
+            'Actinic Keratoses': 'akiec',
+            'Basal Cell Carcinoma': 'bcc',
+            'Benign Keratosis-like Lesions': 'bkl',
+            'Dermatofibroma': 'df',
+            'Melanocytic Nevi': 'nv',
+            'Melanoma': 'mel',
+            'Vascular Lesions': 'vasc'
+        }
+
+        X_img, X_meta = self.preprocess_sample_data()
         results = []
 
         for i in range(len(X_img)):
@@ -78,8 +98,11 @@ class SKINModel:
                 self.img_input_name: img,
                 self.meta_input_name: meta
             })
+
             pred_idx = int(np.argmax(output[0], axis=1)[0])
-            results.append(class_names[pred_idx])
+            full_name = class_names[pred_idx]
+            abbr = name_to_abbr.get(full_name, 'unknown')
+            results.append(abbr)
 
         return results
 
